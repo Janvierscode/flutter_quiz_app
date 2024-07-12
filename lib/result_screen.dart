@@ -3,7 +3,12 @@ import 'package:flutter_quiz_app/data/questions.dart';
 import 'package:flutter_quiz_app/question_summary.dart%20%20';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({required this.chosenAnswers, super.key});
+  const ResultScreen({
+    required this.onRestart,
+    required this.chosenAnswers,
+    super.key,
+  });
+  final void Function() onRestart;
   final List<String> chosenAnswers;
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -33,7 +38,8 @@ class ResultScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-                'Congratulations! you answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
+              'Congratulations! you answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
+            ),
             const SizedBox(
               height: 30.0,
             ),
@@ -42,7 +48,7 @@ class ResultScreen extends StatelessWidget {
               height: 30.0,
             ),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: onRestart,
               label: const Text('Restart Quiz'),
               icon: const Icon(Icons.refresh),
             ),
